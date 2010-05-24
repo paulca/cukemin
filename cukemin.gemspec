@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "generators/cukemin/USAGE",
      "generators/cukemin/cukemin_generator.rb",
      "generators/cukemin/templates/controller.rb",
+     "generators/cukemin/templates/views/index.html.erb",
      "rails/init.rb",
      "spec/blueprints.rb",
      "spec/cukemin_generator_spec.rb",
