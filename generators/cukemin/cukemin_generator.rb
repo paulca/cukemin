@@ -10,6 +10,9 @@ class CukeminGenerator < Rails::Generator::NamedBase
       
       m.directory view_dir
       m.template "views/index.html.erb", "#{view_dir}/index.html.erb"
+      m.template "views/new.html.erb", "#{view_dir}/new.html.erb"
+      m.template "views/edit.html.erb", "#{view_dir}/edit.html.erb"
+      m.template "views/_form.html.erb", "#{view_dir}/_form.html.erb"
     end
   end
   

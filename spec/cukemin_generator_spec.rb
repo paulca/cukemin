@@ -10,6 +10,9 @@ describe CukeminGenerator do
   
   let(:controller_file) { fake_rails_root + '/app/controllers/admin/places_controller.rb' }
   let(:index_view_file) { fake_rails_root + '/app/views/admin/places/index.html.erb' }
+  let(:edit_view_file) { fake_rails_root + '/app/views/admin/places/edit.html.erb' }
+  let(:new_view_file) { fake_rails_root + '/app/views/admin/places/new.html.erb' }
+  let(:form_view_file) { fake_rails_root + '/app/views/admin/places/_form.html.erb' }
   
   it "should create the controller file" do
     File.exists?(controller_file).should be_true
@@ -37,10 +40,38 @@ describe CukeminGenerator do
     output.should match(/if @places.empty?/)
     output.should match(/No places found./)
     output.should match(/@places.each do |place|/)
-    output.should match(/@place.name/)
+    output.should match(/place.name/)
     output.should match(/link_to "Edit", admin_place_path\(place\)/)
     output.should include(%Q[link_to "Delete", admin_place_path(place), :method => :delete, :confirm => 'Are you sure?'])
     output.should include("will_paginate(@places)")
+  end
+  
+  it "should create the new view file" do
+    File.exists?(new_view_file).should be_true
+  end
+  
+  it "should output the new view" do
+    output = File.read(new_view_file)
+    output.should include("New Place")
+  end
+
+  it "should create the edit view file" do
+    File.exists?(edit_view_file).should be_true
+  end
+  
+  it "should output the new view" do
+    output = File.read(edit_view_file)
+    output.should include("Edit Place")
+  end
+  
+  it "should create the form partial file" do
+    File.exists?(form_view_file).should be_true
+  end
+  
+  it "should output the form partial" do
+    output = File.read(form_view_file)
+    output.should include(%Q[<%- form_for(@place) do |f| -%>])
+    output.should include(%Q[<%= f.submit "Save" %> or <%= link_to "Cancel", admin_places_path %>])
   end
   
   after do
