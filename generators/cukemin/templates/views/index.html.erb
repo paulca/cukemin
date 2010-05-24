@@ -1,0 +1,28 @@
+<h2><%= plural_name.titleize %></h2>
+
+<%%- if @<%= plural_name %>.empty? -%>
+  <p>No <%= plural_name %> found.</p>
+<%%- else -%>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%%- @<%= plural_name %>.each do |<%= singular_name %>| -%>
+        <tr>
+          <td>
+            <%%= @<%= singular_name %>.name %>
+            (<%%= link_to "Edit", <%= singular_path_helper %>_path(<%= singular_name %>) -%>)
+          </td>
+          <td>
+            <%%= link_to "Delete", <%= singular_path_helper %>_path(<%= singular_name %>), :method => :delete, :confirm => 'Are you sure?' -%>
+          </td>
+        </tr>
+      <%%- end -%>
+    </tbody>
+  </table>
+  <%%= will_paginate(@<%= plural_name %>)  %>
+<%%- end -%>

@@ -7,6 +7,9 @@ class CukeminGenerator < Rails::Generator::NamedBase
       
       m.directory controller_dir
       m.template "controller.rb", "#{controller_dir}/#{plural_name}_controller.rb"
+      
+      m.directory view_dir
+      m.template "views/index.html.erb", "#{view_dir}/index.html.erb"
     end
   end
   
@@ -22,6 +25,10 @@ class CukeminGenerator < Rails::Generator::NamedBase
   
   def controller_dir
     "app/controllers/#{File.dirname(file_path)}"
+  end
+  
+  def view_dir
+    "app/views/#{File.dirname(file_path)}/#{plural_name}"
   end
   
   def plural_class_name
