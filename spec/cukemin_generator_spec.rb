@@ -13,6 +13,7 @@ describe CukeminGenerator do
   let(:edit_view_file) { fake_rails_root + '/app/views/admin/places/edit.html.erb' }
   let(:new_view_file) { fake_rails_root + '/app/views/admin/places/new.html.erb' }
   let(:form_view_file) { fake_rails_root + '/app/views/admin/places/_form.html.erb' }
+  let(:feature_file) { fake_rails_root + '/features/admin_places.feature' }
   
   it "should create the controller file" do
     File.exists?(controller_file).should be_true
@@ -37,6 +38,7 @@ describe CukeminGenerator do
   it "should output the index view" do
     output = File.read(index_view_file)
     output.should match(/Places/)
+    output.should include(%Q[<li><%= link_to 'Add New Place', new_admin_place_path %></li>])
     output.should match(/if @places.empty?/)
     output.should match(/No places found./)
     output.should match(/@places.each do |place|/)
@@ -74,6 +76,18 @@ describe CukeminGenerator do
     output.should include(%Q[<%= f.submit "Save" %> or <%= link_to "Cancel", admin_places_path %>])
   end
   
+  it "should create the feature file" do
+    File.exists?(feature_file).should be_true
+  end
+  
+  it "should output the form partial" do
+    output = File.read(feature_file)
+    output.should include(%Q[Feature: Managing Places])
+    output.should include(%Q[Scenario: Creating a new place])
+    output.should include(%Q[When I follow "Places"])
+    output.should include(%Q[And I follow "Add New Place"])
+  end
+
   after do
     FileUtils.rm_r(fake_rails_root)
   end

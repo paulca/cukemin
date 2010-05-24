@@ -1,5 +1,10 @@
 <h2><%= plural_name.titleize %></h2>
 
+<ul>
+  <li><%%= link_to 'Add New <%= singular_name.titleize %>', new_<%= singular_path_helper %>_path %></li>
+</ul>
+
+
 <%%- if @<%= plural_name %>.empty? -%>
   <p>No <%= plural_name %> found.</p>
 <%%- else -%>

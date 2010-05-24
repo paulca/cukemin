@@ -13,6 +13,9 @@ class CukeminGenerator < Rails::Generator::NamedBase
       m.template "views/new.html.erb", "#{view_dir}/new.html.erb"
       m.template "views/edit.html.erb", "#{view_dir}/edit.html.erb"
       m.template "views/_form.html.erb", "#{view_dir}/_form.html.erb"
+      
+      m.directory 'features'
+      m.template 'feature.feature', "features/#{plural_path_helper}.feature"
     end
   end
   
