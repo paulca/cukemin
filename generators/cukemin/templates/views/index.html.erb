@@ -15,7 +15,7 @@
         <tr>
           <td>
             <%%= <%= singular_name %>.name %>
-            (<%%= link_to "Edit", <%= singular_path_helper %>_path(<%= singular_name %>) -%>)
+            (<%%= link_to "Edit", edit_<%= singular_path_helper %>_path(<%= singular_name %>) -%>)
           </td>
           <td>
             <%%= link_to "Delete", <%= singular_path_helper %>_path(<%= singular_name %>), :method => :delete, :confirm => 'Are you sure?' -%>

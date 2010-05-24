@@ -41,7 +41,7 @@ describe CukeminGenerator do
     output.should match(/No places found./)
     output.should match(/@places.each do |place|/)
     output.should match(/place.name/)
-    output.should match(/link_to "Edit", admin_place_path\(place\)/)
+    output.should match(/link_to "Edit", edit_admin_place_path\(place\)/)
     output.should include(%Q[link_to "Delete", admin_place_path(place), :method => :delete, :confirm => 'Are you sure?'])
     output.should include("will_paginate(@places)")
   end
