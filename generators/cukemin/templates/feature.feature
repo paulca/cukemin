@@ -19,14 +19,14 @@ Feature: Managing <%= plural_name.titleize %>
     Given a <%= singular_name %> "Goravia"
       And I am on the admin dashboard
       And I follow "<%= plural_name.titleize %>"
-      And I follow "Goravia"
+      And I follow "Edit"
       And I fill in "Name" with "Gooravia"
       And I press "Save"
     Then I should see "Gooravia"
       And I should not see "Goravia"
   
   Scenario: Deleting an existing <%= singular_name %>
-    Given a <%- singular_name %> "Goravia"
+    Given a <%= singular_name %> "Goravia"
       And I am on the admin dashboard
       And I follow "<%= plural_name.titleize %>"
       And I follow "Delete"
