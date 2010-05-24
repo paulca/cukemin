@@ -72,7 +72,7 @@ describe CukeminGenerator do
   
   it "should output the form partial" do
     output = File.read(form_view_file)
-    output.should include(%Q[<%- form_for(@place) do |f| -%>])
+    output.should include(%Q[<%- form_for([:admin, @place]) do |f| -%>])
     output.should include(%Q[<%= f.submit "Save" %> or <%= link_to "Cancel", admin_places_path %>])
   end
   

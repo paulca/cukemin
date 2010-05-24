@@ -19,10 +19,24 @@ class CukeminGenerator < Rails::Generator::NamedBase
     end
   end
   
+  def split_class_name
+    class_name.split('::')
+  end
+  
+  def module_parts
+    split_class_name[0,split_class_name.length - 1]
+  end
+  
   def module_name
-    parts = class_name.split('::')
-    parts.pop
-    parts.join('::')
+    module_parts.join('::')
+  end
+  
+  def form_object
+    if module_parts.empty?
+      "@#{singular_name}" 
+    else
+      "[#{module_parts.map{ |p| ':' + p.downcase }.join(',')}, @#{singular_name}]"
+    end
   end
   
   def model_name
