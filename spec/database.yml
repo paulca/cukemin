@@ -1,0 +1,21 @@
+sqlite:
+  :adapter: sqlite
+  :database: spec/cukemin.sqlite.db
+
+sqlite3:
+  :adapter: sqlite3
+  :database: spec/cukemin.sqlite3.db
+
+postgresql:
+  :adapter: postgresql
+  :username: postgres
+  :password: postgres
+  :database: cukemin_test
+  :min_messages: ERROR
+
+mysql:
+  :adapter: mysql
+  :host: localhost
+  :username: root
+  :password: password
+  :database: cukemin_test
