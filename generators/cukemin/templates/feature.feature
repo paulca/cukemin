@@ -1,4 +1,4 @@
-Feature: Managing <%= plural_name.titleize %>
+Feature: Managing <%= plural_name.humanize.titleize %>
   In order to ...
   As a ...
   I want to be able to manage <%= plural_name %>
@@ -16,7 +16,7 @@ Feature: Managing <%= plural_name.titleize %>
     Then I should see "Biggles"
   
   Scenario: Editing an existing <%= singular_name %>
-    Given a <%= singular_name %> "Goravia"
+    Given a <%= singular_name.humanize.downcase %> "Goravia"
       And I am on the admin dashboard
       And I follow "<%= plural_name.titleize %>"
       And I follow "Edit"
@@ -26,7 +26,7 @@ Feature: Managing <%= plural_name.titleize %>
       And I should not see "Goravia"
   
   Scenario: Deleting an existing <%= singular_name %>
-    Given a <%= singular_name %> "Goravia"
+    Given a <%= singular_name.humanize.downcase %> "Goravia"
       And I am on the admin dashboard
       And I follow "<%= plural_name.titleize %>"
       And I follow "Delete"
