@@ -5,7 +5,7 @@ require 'rails_generator/scripts/generate'
 describe CukeminGenerator do
   
   before do
-    Rails::Generator::Scripts::Generate.new.run(["cukemin", 'admin/place'], :destination => fake_rails_root, :backtrace => true)
+    Rails::Generator::Scripts::Generate.new.run(["cukemin", 'admin/place', 'name:string', 'description:text'], :destination => fake_rails_root, :backtrace => true)
   end
   
   let(:controller_file) { fake_rails_root + '/app/controllers/admin/places_controller.rb' }
@@ -73,6 +73,7 @@ describe CukeminGenerator do
   it "should output the form partial" do
     output = File.read(form_view_file)
     output.should include(%Q[<%- form_for([:admin, @place]) do |f| -%>])
+    output.should include(%Q[<%= f.label :name %> <%= f.text_field :name %> <br />])
     output.should include(%Q[<%= f.submit "Save" %> or <%= link_to "Cancel", admin_places_path %>])
   end
   
@@ -80,7 +81,7 @@ describe CukeminGenerator do
     File.exists?(feature_file).should be_true
   end
   
-  it "should output the form partial" do
+  it "should output the feature file" do
     output = File.read(feature_file)
     output.should include(%Q[Feature: Managing Places])
     output.should include(%Q[Scenario: Creating a new place])

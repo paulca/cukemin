@@ -1,4 +1,45 @@
 class CukeminGenerator < Rails::Generator::NamedBase
+  
+  attr_accessor :name, :attributes, :controller_actions
+  
+  def initialize(runtime_args, runtime_options = {})
+    super
+    usage if @args.empty?
+    
+    @name = @args.first
+    @controller_actions = []
+    @attributes = []
+    @args[0..-1].each do |arg|
+      if arg == '!'
+        options[:invert] = true
+      elsif arg.include? ':'
+        @attributes << Rails::Generator::GeneratedAttribute.new(*arg.split(":"))
+      else
+        @controller_actions << arg
+        @controller_actions << 'create' if arg == 'new'
+        @controller_actions << 'update' if arg == 'edit'
+      end
+    end
+    
+    @controller_actions.uniq!
+    @attributes.uniq!
+    
+    if options[:invert] || @controller_actions.empty?
+      @controller_actions = all_actions - @controller_actions
+    end
+    
+    if @attributes.empty?
+      options[:skip_model] = true # default to skipping model if no attributes passed
+      if model_exists?
+        model_columns_for_attributes.each do |column|
+          @attributes << Rails::Generator::GeneratedAttribute.new(column.name.to_s, column.type.to_s)
+        end
+      else
+        @attributes << Rails::Generator::GeneratedAttribute.new('name', 'string')
+      end
+    end
+  end
+  
   def manifest
     record do |m|
       # puts "#{module_name}, #{model_name}, #{class_name}, #{file_name}, #{file_path}"
@@ -61,6 +102,10 @@ class CukeminGenerator < Rails::Generator::NamedBase
   
   def plural_path_helper
     "#{File.dirname(file_path).gsub('/', '_')}_#{plural_name}"
+  end
+  
+  def all_actions
+    %w[index show new create edit update destroy]
   end
 
   def after_generate

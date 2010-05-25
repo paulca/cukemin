@@ -6,7 +6,7 @@
 
 
 <%%- if @<%= plural_name %>.empty? -%>
-  <p>No <%= plural_name %> found.</p>
+  <p>No <%= plural_name.humanize.downcase %> found.</p>
 <%%- else -%>
   <table>
     <thead>

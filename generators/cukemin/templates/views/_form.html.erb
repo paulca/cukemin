@@ -1,7 +1,9 @@
 <%%- form_for(<%= form_object %>) do |f| -%>
   <%%= f.error_messages  -%>
   <fieldset>
-    <%%= f.label :name %> <%%= f.text_field :name %> <br />
+    <%- for attribute in attributes -%>
+      <%%= f.label :<%= attribute.name %> %> <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %> <br />
+    <%- end -%>
   </fieldset>
   
   <%%= f.submit "Save" %> or <%%= link_to "Cancel", <%= plural_path_helper %>_path %>
