@@ -25,7 +25,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "cukemin"
-    s.version = "0.1.1"
+    s.version = "0.1.2"
     s.author = "Paul Campbell"
     s.email = "paul@rslw.com"
     s.homepage = "http://www.github.com/paulca/cukemin"
